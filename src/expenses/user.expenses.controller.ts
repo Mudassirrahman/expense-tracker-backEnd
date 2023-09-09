@@ -3,7 +3,7 @@ import { ExpensesService } from './expenses.service';
 import { Expense } from './entities/expense.entity';
 
 @Controller('expenses')
-export class ExpensesController {
+export class UserExpensesController {
   constructor(private readonly expensesService: ExpensesService) {}
 
   @Post()
@@ -27,14 +27,4 @@ export class ExpensesController {
     return expense;
   }
 
-  @Delete(':id')
-  async deleteExpense(@Param('id') id: number) {
-    return this.expensesService.deleteExpense(id);
-  }
-
-  @Put(':id')
-  async updateExpense(@Param('id') id: number, @Body() updatedExpense: Expense) {
-    return this.expensesService.updateExpense(id, updatedExpense);
-  }
-  // Implement other CRUD endpoints (, find by ID) here
 }
