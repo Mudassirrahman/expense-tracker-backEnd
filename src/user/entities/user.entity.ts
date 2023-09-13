@@ -19,7 +19,7 @@ export class UserEntity extends EntityBase {
   @OneToMany(() => Expense, (expense) => expense.user)
   expenses: Expense[];
 
-  @Column({ default: 'user' })
+  @Column()
   role: string;
 
 
