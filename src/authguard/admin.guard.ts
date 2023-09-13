@@ -3,6 +3,9 @@
 // import { Reflector } from '@nestjs/core';
 // import { UserEntity } from 'src/user/entities/user.entity';
 
+import { ExecutionContext, Injectable, UnauthorizedException } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
+
 // @Injectable()
 // export class AdminGuard implements CanActivate {
 //   constructor(private reflector: Reflector) {}
@@ -30,3 +33,23 @@
 //     return requiredRoles.includes('admin');
 //   }
 // }
+@Injectable() 
+ export class AdminAuthGuard extends AuthGuard('jwt') { 
+   canActivate(context: ExecutionContext): boolean { 
+     const isAuth = super.canActivate(context); 
+     if (!isAuth) { 
+       throw new UnauthorizedException('Unauthorized'); 
+     } 
+  
+     const request = context.switchToHttp().getRequest(); 
+     const user = request.user; 
+  
+  
+     // Check if the user has the required role (e.g., "note_manager") 
+     if (user.role !=='ADMIN') { 
+       throw new UnauthorizedException(); 
+     } 
+  
+     return true; 
+   } 
+ }

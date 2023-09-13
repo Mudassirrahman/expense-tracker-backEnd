@@ -9,29 +9,29 @@ export class UserExpensesController {
   constructor(private readonly expensesService: ExpensesService) {}
 
   @Post()
+   @UseGuards(JwtAuthGuard, ExpenseGuard)
   @SetMetadata('roles', ['USER'])
-  @UseGuards(JwtAuthGuard, ExpenseGuard)
   create(@Body() expense: Expense): Promise<Expense> {
     return this.expensesService.createExpense(expense);
   }
 
   @Get()
+   @UseGuards(JwtAuthGuard, ExpenseGuard)
   @SetMetadata('roles', ['USER'])
-  @UseGuards(JwtAuthGuard, ExpenseGuard)
   findAll(): Promise<Expense[]> {
     return this.expensesService.findAllExpenses();
   }
   @Get()
+   @UseGuards(JwtAuthGuard, ExpenseGuard)
   @SetMetadata('roles', ['USER'])
-  @UseGuards(JwtAuthGuard, ExpenseGuard)
   async getAllExpenses() {
     const expenses = await this.expensesService.getAllExpenses();
     return expenses;
   }
 
   @Get(':id')
+   @UseGuards(JwtAuthGuard, ExpenseGuard)
   @SetMetadata('roles', ['USER'])
-  @UseGuards(JwtAuthGuard, ExpenseGuard)
   async getExpenseById(@Param('id') id: number) {
     const expense = await this.expensesService.getExpenseById(id);
     return expense;
