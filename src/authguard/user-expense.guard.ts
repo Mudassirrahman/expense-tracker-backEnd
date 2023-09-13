@@ -17,7 +17,6 @@ export class ExpenseGuard extends AuthGuard('jwt') {
     const user = request.user;
 
     
-    // Check if the user has the required role (e.g., "note_manager")
     if (user.role !=='USER') {
       throw new UnauthorizedException();
     }

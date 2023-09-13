@@ -11,11 +11,9 @@ import {
 } from '@nestjs/common';
 import { ExpensesService } from './expenses.service';
 import { Expense } from './entities/expense.entity';
-import { RolesGuard } from 'src/authguard/role.guard';
-import { Role } from 'src/decorators/roles.decorator';
 import { JwtAuthGuard } from 'src/authguard/jwt.guard';
-import {} from './guard/expense.guard';
-import { AdminAuthGuard } from 'src/authguard/admin.guard';
+import {} from '../authguard/user-expense.guard';
+import { AdminAuthGuard } from 'src/authguard/admin-expense.guard';
 
 @Controller('admin/expenses') // Define a separate route for admin expenses
 export class AdminExpensesController {
@@ -56,5 +54,4 @@ export class AdminExpensesController {
     return this.expensesService.deleteExpense(id);
   }
 
-  // Implement other admin-specific CRUD operations
 }

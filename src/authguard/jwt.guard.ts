@@ -9,9 +9,8 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   }
 
   handleRequest(err, user, info) {
-    // You can add custom logic here to handle the result of JWT validation
     if (err || !user) {
-      throw err || new UnauthorizedException('Unauthorized MUDASSIR');
+      throw err || new UnauthorizedException('Unauthorized');
     }
     return user;
   }
